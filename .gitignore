@@ -1,0 +1,44 @@
+# Operating System Files
+
+*.DS_Store
+Thumbs.db
+*.sw?
+.#*
+*#
+*~
+*.sublime-*
+
+# Build Artifacts
+
+.gradle/
+build/
+target/
+bin/
+dependency-reduced-pom.xml
+
+# Eclipse Project Files
+
+.classpath
+.project
+.settings/
+.sts4-cache/
+.attach_pid*
+
+# IntelliJ IDEA Files
+
+*.iml
+*.ipr
+*.iws
+*.idea
+
+README.html
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
