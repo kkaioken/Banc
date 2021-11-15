@@ -1,4 +1,4 @@
-package com.example.testingweb;
+package com.example.testingweb.exemplo;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

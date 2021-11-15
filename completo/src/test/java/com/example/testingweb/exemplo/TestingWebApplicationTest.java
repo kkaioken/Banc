@@ -1,4 +1,4 @@
-package com.example.testingweb;
+package com.example.testingweb.exemplo;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
