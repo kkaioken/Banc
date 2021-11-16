@@ -2,6 +2,7 @@ package com.example.testingweb.produto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,13 @@ public class ConsultaProdutoService {
 		this.produtoRepository = produtoRepository;
 	}
 	
-	public ProdutoResponse buscarProdutoPeloId(int id) {
-		return converter(produtoRepository.buscarPelo(id));
+	public ProdutoResponse buscarProdutoPeloId(Long id) {
+		return converter(produtoRepository.findById(id));
+	}
+
+	private ProdutoResponse converter(Optional<Produto> findById) {
+		Produto produto = findById.get();
+		return new ProdutoResponse(produto.getId(), produto.getDescricao(), produto.getValorUnitario());
 	}
 
 	private ProdutoResponse converter(Produto produto) {
@@ -25,7 +31,7 @@ public class ConsultaProdutoService {
 	}
 
 	public List<ProdutoResponse> buscarTodos() {
-		List<Produto> produtos = produtoRepository.buscarTodos();
+		List<Produto> produtos = produtoRepository.findAll();
 		return converter(produtos);
 	}
 

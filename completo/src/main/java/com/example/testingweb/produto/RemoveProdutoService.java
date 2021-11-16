@@ -13,7 +13,7 @@ public class RemoveProdutoService {
 		this.produtoRepository = produtoRepository;
 	}
 
-	public void remover(Integer id) {
-		produtoRepository.excluir(id);
+	public void remover(Long id) {
+		produtoRepository.deleteById(id);
 	}
 }

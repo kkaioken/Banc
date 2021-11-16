@@ -1,12 +1,11 @@
 package com.example.testingweb.desconto;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
-
-import com.example.testingweb.desconto.CalculadoraDeDesconto;
+import org.junit.jupiter.api.Test;
 
 public class CalculadoraDeDescontoTeste {
+
 	@Test
 	public void deve_calcular_desconto_para_compras_acima_de_100_reais() {
 		// arrange

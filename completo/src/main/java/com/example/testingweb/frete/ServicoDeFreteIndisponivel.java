@@ -4,6 +4,6 @@ public class ServicoDeFreteIndisponivel extends Exception {
 	private static final long serialVersionUID = 1L;
 	
 	public ServicoDeFreteIndisponivel() {
-		super("O servi�o de frete est� indispon�vel no momento");
+		super("O serviço de frete está indisponível no momento");
 	}
 }

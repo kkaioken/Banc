@@ -3,77 +3,49 @@ package com.example.testingweb.produto;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.example.testingweb.MensagemUtil;
-
-@Controller
+@RestController
+@RequestMapping("/api")
 public class ProdutoController {
 
+	@Autowired
+	private ConsultaProdutoService consultaProdutoService;
+	
 	@Autowired
 	private AdicionaProdutoService adicionaProdutoService;
 	
 	@Autowired
-	private ConsultaProdutoService consultaProdutoService;
+	private RemoveProdutoService removeProdutoService;
 	
-	private ProdutoResponse produto;
-	
-	List<ProdutoResponse> produtos;
+	@PostMapping("/produtos")
+	public ResponseEntity<ProdutoResponse> salvar(@RequestBody ProdutoRequest produtoRequest) throws ValorInvalido {
+		HttpStatus status = HttpStatus.CREATED;
+        ProdutoResponse saved = adicionaProdutoService.inserir(produtoRequest);
+        return new ResponseEntity<>(saved, status);
+	}
 
-	private boolean edicao;
-	
-	public ProdutoController() {
-		produto = new ProdutoResponse();
-		produtos = new ArrayList<>();
-	}
-	
-	@PostConstruct
-	public void init() {
-		produtos = consultaProdutoService.buscarTodos();
-	}
-	
-	public void salvar() throws ValorInvalido {
-		try {
-			ProdutoRequest produtoRequest = new ProdutoRequest(produto.getDescricao(), produto.getValorUnitario());
-			adicionaProdutoService.inserir(produtoRequest);
-			MensagemUtil.mensagemInfo("Usu�rio salvo.");
-			
-			if(!edicao) {
-				produtos.add(produto);
-			}
-			produto = new ProdutoResponse();
-		} catch (ServiceException e) {
-			MensagemUtil.mensagemErro("Login j� existente.");
-		}
-	}
-	
-	public void prepararInclusao() {
-		this.edicao = false;
-		produto = new ProdutoResponse();
-	}
-	
-	public void prepararEdicao(ProdutoResponse produto) {
-		this.edicao = true;
-		this.produto = produto;
-	}
-	
-	public ProdutoResponse getProduto() {
-		return produto;
-	}
-	
-	public void setProduto(ProdutoResponse produto) {
-		this.produto = produto;
-	}
-	
+	@GetMapping("/produtos")
 	public List<ProdutoResponse> getProdutos() {
-		return produtos;
+		return consultaProdutoService.buscarTodos();
 	}
 
-	public boolean isEdicao() {
-		return edicao;
+	@GetMapping("/produtos/{id}")
+	public ProdutoResponse getProdutoPeloId(@PathVariable Long id) {
+		return consultaProdutoService.buscarProdutoPeloId(id);
 	}
+
+	@DeleteMapping("/produtos/{id}")
+  	public void deleteProduto(@PathVariable Long id) {
+    	removeProdutoService.remover(id);
+  }
 }

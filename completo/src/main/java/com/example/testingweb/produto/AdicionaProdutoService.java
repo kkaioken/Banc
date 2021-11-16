@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class AdicionaProdutoService {
 	private ProdutoRepository produtoRepository;
 
@@ -13,10 +14,9 @@ public class AdicionaProdutoService {
 		this.produtoRepository = produtoRepository;
 	}
 	
-	@Transactional
-	public int inserir(ProdutoRequest produtoRequest) throws ValorInvalido {
+	public ProdutoResponse inserir(ProdutoRequest produtoRequest) throws ValorInvalido {
 		Produto produto = new Produto(produtoRequest.getDescricao(), produtoRequest.getValorUnitario());
-		produtoRepository.salvar(produto);
-		return produto.getId();
+		produtoRepository.save(produto);
+		return new ProdutoResponse(produto.getId(), produto.getDescricao(), produto.getValorUnitario());
 	}
 }

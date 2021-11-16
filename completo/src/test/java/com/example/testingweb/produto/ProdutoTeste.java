@@ -1,16 +1,17 @@
 package com.example.testingweb.produto;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import com.example.testingweb.produto.Produto;
-import com.example.testingweb.produto.ValorInvalido;
+import org.junit.jupiter.api.Test;
 
 public class ProdutoTeste {
 
 	private static final double VALOR_NEGATIVO = -1d;
 
-	@Test(expected = ValorInvalido.class)
+	@Test
 	public void nao_deve_permitir_informar_valor_menor_que_zero() throws Exception {
-		new Produto("Fogão 4 bocas", VALOR_NEGATIVO);
+		assertThrows(ValorInvalido.class, ()-> {
+			new Produto("Fogão 4 bocas", VALOR_NEGATIVO);
+		});
 	}
 }

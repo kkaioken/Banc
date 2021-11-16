@@ -1,18 +1,18 @@
-package com.example.testingweb.carrinhodecompra;;
+package com.example.testingweb.carrinhodecompra;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.example.testingweb.carrinho.ItemDoCarrinho;
 import com.example.testingweb.produto.Produto;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ItemDoCarrinhoTeste {
 
 	private Produto geladeira;
 
-	@Before
+	@BeforeEach
 	public void inicializar() throws Exception {
 		geladeira = new Produto("Geladeira", 1200d);
 	}

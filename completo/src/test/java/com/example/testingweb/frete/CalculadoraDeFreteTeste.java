@@ -1,15 +1,13 @@
 package com.example.testingweb.frete;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import org.junit.Before;
-import org.junit.Test;
-import static org.mockito.Mockito.*;
-
-import com.example.testingweb.frete.CalculadoraDeFrete;
-import com.example.testingweb.frete.ServicoDeFrete;
-import com.example.testingweb.frete.ServicoDeFreteImpl;
-import com.example.testingweb.frete.ServicoDeFreteIndisponivel;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CalculadoraDeFreteTeste {
 	
@@ -18,7 +16,7 @@ public class CalculadoraDeFreteTeste {
 	private ServicoDeFrete servicoDeFrete;
 	private CalculadoraDeFrete calculadora;
 	
-	@Before
+	@BeforeEach
 	public void init() {
 		servicoDeFrete = mock(ServicoDeFreteImpl.class);
 		calculadora = new CalculadoraDeFrete(servicoDeFrete, CEP_ORIGEM);
@@ -36,11 +34,13 @@ public class CalculadoraDeFreteTeste {
 		assertEquals(valorDoFreteEsperado, valorDoFreteRetornado, 0.001);
 	}
 	
-	@Test(expected = ServicoDeFreteIndisponivel.class)
+	@Test
 	public void deve_alertar_caso_servico_esteja_indisponivel() throws Exception {
 		doThrow(new ServicoDeFreteIndisponivel()).when(servicoDeFrete)
 			.calcularFretePara(CEP_ORIGEM, CEP_DESTINO);
 		
-		calculadora.calcularFretePara(CEP_DESTINO);
+		assertThrows(ServicoDeFreteIndisponivel.class, ()->{
+			calculadora.calcularFretePara(CEP_DESTINO);
+		});
 	}
 }

@@ -2,6 +2,8 @@ package com.example.testingweb.exemplo;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.example.testingweb.HomeController;
+
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;

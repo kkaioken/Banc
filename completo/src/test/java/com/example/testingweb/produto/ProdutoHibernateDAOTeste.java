@@ -1,23 +1,24 @@
 package com.example.testingweb.produto;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.contains;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import com.example.testingweb.TestingWebApplication;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.example.testingweb.produto.Produto;
-import com.example.testingweb.produto.ProdutoRepository;
-
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:springbeanstest.xml")
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = { TestingWebApplication.class })
+@DataJpaTest
 public class ProdutoHibernateDAOTeste {
 	
 	@Autowired
@@ -26,23 +27,23 @@ public class ProdutoHibernateDAOTeste {
 	private Produto fogao;
 	private Produto microondas;
 	
-	@Before
+	@BeforeEach
 	public void init() throws Exception {
 		geladeira = new Produto("Geladeira", 1200d);
-		produtoRepository.salvar(geladeira);
-		fogao = new Produto("Fog�o", 1000d);
-		produtoRepository.salvar(fogao);
+		produtoRepository.save(geladeira);
+		fogao = new Produto("Fogão", 1000d);
+		produtoRepository.save(fogao);
 		microondas = new Produto("Microondas", 200d);
-		produtoRepository.salvar(microondas);
+		produtoRepository.save(microondas);
 	}
 	
 	@Test
 	public void deve_salvar_um_produto() throws Exception {
 		Produto produto = new Produto("Geladeira", 1200d);
 		
-		produtoRepository.salvar(produto);
+		produtoRepository.save(produto);
 		
-		assertNotNull(produtoRepository.buscarPelo(produto.getId()));
+		assertNotNull(produtoRepository.findById(produto.getId()));
 	}
 	
 	@Test
@@ -52,6 +53,6 @@ public class ProdutoHibernateDAOTeste {
 		
 		List<Produto> produtosRetornados = produtoRepository.buscarPorFaixaDePreco(precoMinimo, precoMaximo);
 		
-		assertThat(produtosRetornados, contains(geladeira, fogao));
+		assertThat(produtosRetornados).contains(geladeira, fogao);
 	}
 }

@@ -5,20 +5,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class ProdutoResponse {
 
-	private int id;
+	private Long id;
 	private String descricao;
 	private double valorUnitario;
 	
 	ProdutoResponse() {
 	}
 
-	public ProdutoResponse(int id, String descricao, double valorUnitario) {
+	public ProdutoResponse(Long id, String descricao, double valorUnitario) {
 		this.id = id;
 		this.descricao = descricao;
 		this.valorUnitario = valorUnitario;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
