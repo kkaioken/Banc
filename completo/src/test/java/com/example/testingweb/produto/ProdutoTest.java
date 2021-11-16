@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class ProdutoTeste {
+public class ProdutoTest {
 
 	private static final double VALOR_NEGATIVO = -1d;
 

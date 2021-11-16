@@ -19,7 +19,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = { TestingWebApplication.class })
 @DataJpaTest
-public class ProdutoHibernateDAOTeste {
+public class ProdutoHibernateDAOTest {
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;

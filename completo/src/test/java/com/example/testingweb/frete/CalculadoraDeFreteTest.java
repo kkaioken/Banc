@@ -9,7 +9,7 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class CalculadoraDeFreteTeste {
+public class CalculadoraDeFreteTest {
 	
 	private static final String CEP_ORIGEM = "79750000";
 	private static final String CEP_DESTINO = "79800000";;

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class AdicionadorDeItemAoCarrinhoTeste {
+public class AdicionadorDeItemAoCarrinhoTest {
 	private static final int UM = 1;
 	private Produto celular;
 

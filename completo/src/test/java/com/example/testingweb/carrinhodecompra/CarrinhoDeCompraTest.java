@@ -9,7 +9,7 @@ import com.example.testingweb.produto.Produto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class CarrinhoDeCompraTeste {
+public class CarrinhoDeCompraTest {
 	private static final int UM = 1;
 	private Produto celular;
 

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class CalculadoraDeDescontoTeste {
+public class CalculadoraDeDescontoTest {
 
 	@Test
 	public void deve_calcular_desconto_para_compras_acima_de_100_reais() {
