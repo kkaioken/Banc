@@ -21,7 +21,7 @@ public class MaiorEMenorTest {
 	}
     
     @Test
-    public void ordemDecrescente() {
+    public void deve_verificar_em_ordem_decrescente() {
         CarrinhoDeCompra carrinho = new CarrinhoDeCompra();
         carrinho.adicionar(new ItemDoCarrinho(geladeira, UM));
         carrinho.adicionar(new ItemDoCarrinho(liquidificador, UM));
@@ -33,4 +33,8 @@ public class MaiorEMenorTest {
         Assertions.assertEquals("Jogo de pratos", algoritmo.getMenor().getDescricao());
         Assertions.assertEquals("Geladeira", algoritmo.getMaior().getDescricao());
     }
+
+    // outras ordens
+    // apenas um produto
+    // carrinho sem produto
 }
